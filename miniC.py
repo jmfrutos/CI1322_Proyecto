@@ -31,6 +31,12 @@ def p_asign(p):
     'S : ID IG NUM PyC'
     print('%s %s %s%s' % (p[1], p[2], p[3], p[4]))
     
+def p_fact(p):
+	'''fact : (expr)
+		| -expr
+		| ID
+		| NUM'''
+	print
 
 def p_error(p):
     if p:
