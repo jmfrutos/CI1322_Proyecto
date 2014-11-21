@@ -4,11 +4,10 @@ tokens = ('ID','IG','NUM','PyC','IF','ELSE','PRINT','WHILE')
 
 t_ID  = r'[A-Za-z_][A-Za-z0-9_]*'
 t_IG  = r'='
-t_NUM  = r'[0-9]+'
 t_PyC  = r';'
 
-#def t_VAR(t):
- #   r'[A-Za-z_][A-Za-z0-9_]*'
+def t_NUM(t):
+	r'[0-9]+'
 	#symb[t.value] =
 
 t_ignore = " \t"
