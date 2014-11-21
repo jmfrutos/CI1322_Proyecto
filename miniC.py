@@ -36,7 +36,7 @@ def p_fact(p):
 		| -expr
 		| ID
 		| NUM'''
-	print
+	print sgdfjkhsjgfljhsgdhojoshgfdjosjlhjsgfhl
 
 def p_error(p):
     if p:
