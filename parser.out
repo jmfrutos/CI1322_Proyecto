@@ -1,0 +1,63 @@
+Created by PLY version 3.4 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> S
+Rule 1     S -> ID IG NUM PyC
+
+Terminals, with rules where they appear
+
+ID                   : 1
+IG                   : 1
+NUM                  : 1
+PyC                  : 1
+error                : 
+
+Nonterminals, with rules where they appear
+
+S                    : 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . S
+    (1) S -> . ID IG NUM PyC
+
+    ID              shift and go to state 2
+
+    S                              shift and go to state 1
+
+state 1
+
+    (0) S' -> S .
+
+
+
+state 2
+
+    (1) S -> ID . IG NUM PyC
+
+    IG              shift and go to state 3
+
+
+state 3
+
+    (1) S -> ID IG . NUM PyC
+
+    NUM             shift and go to state 4
+
+
+state 4
+
+    (1) S -> ID IG NUM . PyC
+
+    PyC             shift and go to state 5
+
+
+state 5
+
+    (1) S -> ID IG NUM PyC .
+
+    $end            reduce using rule 1 (S -> ID IG NUM PyC .)
+

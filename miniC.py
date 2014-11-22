@@ -1,23 +1,40 @@
-tokens = ('ID','IG','NUM','PyC','IF','ELSE','PRINT','WHILE')
+literals = [ '+','-','*','/' ]
+#literals = "+-*/"
 
-# lexer
+reserved = {
+   'if' : 'IF',
+   'else' : 'ELSE',
+   'while' : 'WHILE',
+}
 
-t_ID  = r'[A-Za-z_][A-Za-z0-9_]*'
+tokens = ['ID','IG','NUM','PyC']#,'PRINT'] + list(reserved.values())
+
+def t_ID(t):
+    r'[a-zA-Z_][a-zA-Z_0-9]*'
+    #t.type = reserved.get(t.value,'ID')
+    return t
+
 t_IG  = r'='
 t_PyC  = r';'
 
 def t_NUM(t):
 	r'[0-9]+'
-	#symb[t.value] =
+	#t.value = (t.value, symbol_lookup(t.value))
+	#t.value = int(t.value)
+	return t
 
 t_ignore = " \t"
+
+def t_COMMENT(t):
+	r'//.* | /\*[.|\n]*?\*/'
+	pass
 
 def t_newline(t):
 	r'\n+'
 	t.lexer.lineno += t.value.count("\n")
 
 def t_error(t):
-	print("Emocion mal definida '%s'" % t.value[0])
+	print("Error de analisis: '%s'" % t.value[0])
 	t.lexer.skip(1)
 
 import ply.lex as lex
@@ -26,9 +43,10 @@ lex.lex()
 #parser
 
 def p_asign(p):
-	'S : ID IG NUM PyC'
+	"S : ID IG NUM PyC"
 	print('%s %s %s%s' % (p[1], p[2], p[3], p[4]))
 
+'''
 def p_instr1(p):
 	"instr : IF '(' cond ')' instr"
 
@@ -99,7 +117,7 @@ def p_fact3(p):
 def p_fact4(p):
 	'fact : NUM'
 	p[0].val = p[1].val
-
+'''
 def p_error(p):
 	if p:
 		print("Error de sintaxis en '%s'" % p.value)
@@ -109,10 +127,10 @@ def p_error(p):
 import ply.yacc as yacc
 yacc.yacc()
 
-while 1:
+while True:
 	try:
-		s = input('miniC > ')
+		tok = input('miniC > ')
 	except EOFError:
 		break
-	if not s: continue
-	yacc.parse(s)
+	if not tok: continue
+	yacc.parse(tok)
